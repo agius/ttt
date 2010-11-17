@@ -1,0 +1,8 @@
+%h1 You are "O"
+%form{:action => '/', :method => 'post'}
+  %table
+    - 3.times do |r|
+      %tr
+        - 3.times do |c|
+          %td
+            %input{:type => 'submit', :name => "#{r},#{c}", :value => 'hit'}
