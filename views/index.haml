@@ -5,4 +5,12 @@
       %tr
         - 3.times do |c|
           %td
-            %input{:type => 'submit', :name => "#{r},#{c}", :value => 'hit'}
+            - case session['ttt'][r][c]
+            - when 0
+              %input{:type => 'submit', :name => "#{r},#{c}", :value => 'hit'}
+            - when 1
+              O
+            - when 2
+              X
+%p
+  %a{:href => '/new'} New

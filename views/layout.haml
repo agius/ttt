@@ -3,5 +3,8 @@
   %link{:href => "stylesheet.css", :rel => "stylesheet"}
 
 %body
+  - if @flash
+    #flash
+      = @flash
   #container
     = yield
