@@ -1,3 +1,4 @@
+$LOAD_PATH.unshift('~/.gems/gems/') unless $LOAD_PATH.include?('~/.gems/gems/')
 require 'rubygems'
 require 'vendor/sinatra/lib/sinatra.rb'
 require 'vendor/haml/lib/haml.rb'
