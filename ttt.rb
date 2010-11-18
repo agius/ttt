@@ -1,10 +1,5 @@
-if environment == :production
-  require '/home/agius/.gems/gems/sinatra-0.9.4/lib/sinatra.rb'
-  require '/usr/lib/ruby/gems/1.8/gems/haml-2.0.3/lib/haml.rb'
-else
-  require 'sinatra'
-  require 'haml'
-end
+require 'vendor/sinatra/lib/sinatra.rb'
+require 'vendor/haml/lib/haml.rb'
 
 enable :sessions
 
