@@ -47,6 +47,7 @@ end
 end
 
 get '/move' do
+  session['flash'] = 'Invalid move!' and redirect '/' unless params.keys.count > 0
   hit = params.keys.first.match(/(\d+),(\d+)/).to_a
   row, col = hit[1].to_i, hit[2].to_i if hit.count > 2
   if hit.count < 2 || session['ttt'][row][col] != 0
@@ -58,26 +59,26 @@ get '/move' do
   redirect '/draw' unless open_location?
   
   ai_moved = false
-  begin
-    # if player is about to win, block them
-    @win_conditions.each do |coordinates|
-      next if ai_moved
-      open_location = coordinates.select{|point| session['ttt'][point[0]][point[1]] == 0}.first
-      if coordinates.select {|point| session['ttt'][point[0]][point[1]] == 1}.count > 1 and open_location
-        session['ttt'][open_location[0]][open_location[1]] = 2
-        ai_moved = true
-      end
+  # if player is about to win, block them
+  @win_conditions.each do |coordinates|
+    next if ai_moved
+    open_location = coordinates.select{|point| session['ttt'][point[0]][point[1]] == 0}.first
+    if coordinates.select {|point| session['ttt'][point[0]][point[1]] == 1}.count > 1 and open_location
+      session['ttt'][open_location[0]][open_location[1]] = 2
+      ai_moved = true
     end
-    
-    #otherwise, move randomly
-    unless ai_moved
+  end
+  
+  #otherwise, move randomly
+  unless ai_moved
+    begin
       r, c = rand(2), rand(2)
       if session['ttt'][r][c] == 0
         session['ttt'][r][c] = 2
         ai_moved = true
       end
-    end
-  end while (ai_moved == false)
+    end while (ai_moved == false)
+  end
   
   redirect '/lose' if win?(2)
   redirect '/draw' unless open_location?

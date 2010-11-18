@@ -1,2 +1,12 @@
 %h1 You win!
-%a{:href => '/'} Back
+%img{ :src => 'CDalePeterson.jpg' }
+%p
+  %a{:href => '/'} Play Again
+#reddit_button
+  %p Make it an IAMA:
+  %script{ :type => "text/javascript" }
+    reddit_target = "AMA"
+    reddit_url = "self"
+    reddit_text = "I beat a simple program, and I feel really proud. Fire away!";
+    reddit_title = "I beat a computer in Tic Tac Toe. AMA";
+  %script{ :type => "text/javascript", :src => "http://reddit.com/static/button/button1.js"}
