@@ -46,7 +46,7 @@ end
   end
 end
 
-post '/move' do
+get '/move' do
   hit = params.keys.first.match(/(\d+),(\d+)/).to_a
   row, col = hit[1].to_i, hit[2].to_i if hit.count > 2
   if hit.count < 2 || session['ttt'][row][col] != 0

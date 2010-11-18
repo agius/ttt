@@ -1,6 +1,9 @@
 !!!
 %head
   %link{:href => "stylesheet.css", :rel => "stylesheet"}
+  <!--[if !IE]>--> 
+  %link{:rel => "stylesheet", :href => "small-screen.css", :type =>"text/css", :media => "only screen and (max-device-width: 480px)"}
+  <!--<![endif]-->
   %meta{:name => "viewport", :content => "width=device-width,initial-scale=1,user-scalable=no"}
 
 %body

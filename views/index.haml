@@ -7,7 +7,7 @@
           %td
             - case session['ttt'][r][c]
             - when 0
-              %input{:type => 'submit', :name => "#{r},#{c}", :value => ''}
+              %a{:href => "/move?#{r},#{c}", :class => 'hit'} Hit
             - when 1
               O
             - when 2
