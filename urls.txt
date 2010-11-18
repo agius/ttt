@@ -1,0 +1,5 @@
+localhost:4567
+localhost:4567/move?1,1
+localhost:4567/win
+localhost:4567/lose
+localhost:4567/draw
