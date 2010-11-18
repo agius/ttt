@@ -1,5 +1,5 @@
-require 'vendor/sinatra/lib/sinatra.rb'
-require 'vendor/haml/lib/haml.rb'
+require 'sinatra'
+require 'haml'
 
 enable :sessions
 
