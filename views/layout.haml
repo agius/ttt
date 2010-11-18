@@ -1,10 +1,12 @@
 !!!
 %head
   %link{:href => "stylesheet.css", :rel => "stylesheet"}
+  %meta{:name => "viewport", :content => "width=device-width,initial-scale=1,user-scalable=no"}
 
 %body
-  - if @flash
+  - if session['flash']
     #flash
-      = @flash
+      = session['flash']
+      - session['flash'] = nil
   #container
     = yield

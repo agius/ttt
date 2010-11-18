@@ -1,5 +1,10 @@
-require 'sinatra'
-require 'haml'
+if environment == :production
+  require '/home/agius/.gems/gems/sinatra-0.9.4/lib/sinatra.rb'
+  require '/usr/lib/ruby/gems/1.8/gems/haml-2.0.3/lib/haml.rb'
+else
+  require 'sinatra'
+  require 'haml'
+end
 
 enable :sessions
 
@@ -46,9 +51,13 @@ end
   end
 end
 
-post '/' do
+post '/move' do
   hit = params.keys.first.match(/(\d+),(\d+)/).to_a
   row, col = hit[1].to_i, hit[2].to_i if hit.count > 2
+  if hit.count < 2 || session['ttt'][row][col] != 0
+    session['flash'] = 'Invalid move!'
+    redirect '/' and return
+  end
   session['ttt'][row][col] = 1
   redirect '/win' if win?(1)
   redirect '/draw' unless open_location?
@@ -67,7 +76,7 @@ post '/' do
     
     #otherwise, move randomly
     unless ai_moved
-      r, c = (0..2).to_a.sample, (0..2).to_a.sample
+      r, c = rand(2), rand(2)
       if session['ttt'][r][c] == 0
         session['ttt'][r][c] = 2
         ai_moved = true
@@ -77,5 +86,5 @@ post '/' do
   
   redirect '/lose' if win?(2)
   redirect '/draw' unless open_location?
-  haml :index
+  redirect '/'
 end

@@ -1,5 +1,5 @@
 %h1 You are "O"
-%form{:action => '/', :method => 'post'}
+%form{:action => '/move', :method => 'post'}
   %table
     - 3.times do |r|
       %tr
@@ -7,7 +7,7 @@
           %td
             - case session['ttt'][r][c]
             - when 0
-              %input{:type => 'submit', :name => "#{r},#{c}", :value => 'hit'}
+              %input{:type => 'submit', :name => "#{r},#{c}", :value => ''}
             - when 1
               O
             - when 2
