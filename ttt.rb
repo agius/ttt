@@ -17,6 +17,12 @@ helpers do
   def open_location?
     session['ttt'].any? { |row| row.any?{|col| col == 0 } }
   end
+  
+  def open_locations
+    open_locations = []
+    session['ttt'].each_with_index { |row, r| row.each_with_index { |col, c| open_locations << [r, c] if col == 0 } }
+    open_locations
+  end
 end
 
 before do
@@ -71,13 +77,8 @@ get '/move' do
   
   #otherwise, move randomly
   unless ai_moved
-    begin
-      r, c = rand(2), rand(2)
-      if session['ttt'][r][c] == 0
-        session['ttt'][r][c] = 2
-        ai_moved = true
-      end
-    end while (ai_moved == false)
+    r, c = open_locations[rand(open_locations.count - 1)]
+    session['ttt'][r][c] = 2
   end
   
   redirect '/lose' if win?(2)
