@@ -1,0 +1,1 @@
+15.times {|n| `siege -i -f urls.txt -c #{2 ** n} -t60s -m "Beginning Test"`}
